@@ -6,8 +6,7 @@ const style = {
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
 }
 
-class Intro extends Component {
-    render() {
+    function info() {
         return <Fragment>
             <Card raised={true} style={style.card}>
                 <CardContent>
@@ -29,9 +28,9 @@ class Intro extends Component {
             </Card>
         </Fragment>
     }
-}
+
 export default class extends Component {
     render() {
-        return <GridLayout comp={<Intro />} > </GridLayout>
+        return <GridLayout comp={info()} > </GridLayout>
     }
 }
