@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from 'react'
 import Information from './Article/Information'
 import Header from './Layouts/Header'
-// the line above is to do with clean importing 
-// see the comments in './Layouts/Header.js'
-export default class extends Component{
+
+class App extends Component{
     render(){
         // put everything in a fragment
         return <Fragment>
@@ -14,3 +13,5 @@ export default class extends Component{
         </Fragment>
     }
 }
+
+export default App
