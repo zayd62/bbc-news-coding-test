@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core'
 export default class extends Component {
     render() {
         return <Fragment>
-            <Grid container sm={12}>
+            <Grid container>
                 <Grid item sm={1}>
                 </Grid>
                 <Grid item sm={10}>
