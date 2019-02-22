@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Grid } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid'
 
 export default class extends Component {
     render() {
