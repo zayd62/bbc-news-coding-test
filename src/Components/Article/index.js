@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import GridLayout from '../Layouts/GridLayout'
+import ArticleContainer from './ArticleContainer'
 
 const style = {
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
@@ -28,22 +29,6 @@ class information extends Component {
         // this.getDataFromAllURL(articles)
     }
 
-    info() {
-        return <Fragment>
-            <Card raised={true} style={style.card}>
-                <CardContent>
-                    <Typography variant="h6" color="inherit">
-                        Introduction
-                    </Typography>
-                    <Typography variant="body2">
-                        This application will show you 3 random articles and will ask you to rate them out of 10
-                        using the dropdown below the article. The articles are automatically fetched 
-                        from <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbc/news-coding-test-dataset">this</a> GitHub Repository.  
-                    </Typography>
-                </CardContent>
-            </Card>
-        </Fragment>
-    }
     getNumbers(numbers) {
         var i;
         var articles = [];
@@ -71,13 +56,12 @@ class information extends Component {
         var requestResponse = await fetch(url, {
             headers: new Headers({
                 'Accept': 'application/vnd.github.v3.raw',
-                'Authorization': ''
-
+                'Authorization': 
               })
         })
         var requestResponseJSON = await requestResponse.json()
         console.log("finished api call for", url)
-        console.log("the response is", requestResponseJSON)
+        console.log("the response for ", url, "is", requestResponseJSON)
         return requestResponseJSON
 
     }
@@ -93,17 +77,36 @@ class information extends Component {
         console.log("finished adding all promises")
         let allArticleData = await Promise.all(singleURLpromise)
         console.log("got the results from all the promises")
-        console.log("all the data has been received, converting from array to JSON object")
-
-        console.log("converted to json, adding to state")
+        console.log("all the data has been received, adding to state")
         this.setState({JSONdata:allArticleData})
         console.log("reading json data from state")
         window.title = this.state.JSONdata;
         console.log(this.state.JSONdata);
     }
 
+    info() {
+        return <Fragment>
+            <Card raised={true} style={style.card}>
+                <CardContent>
+                    <Typography variant="h6" color="inherit">
+                        Introduction
+                    </Typography>
+                    <Typography variant="body2">
+                        This application will show you 3 random articles and will ask you to rate them out of 5 based on
+                        how much you enjoyed the article using the dropdown below the article. The articles are automatically fetched 
+                        from <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbc/news-coding-test-dataset">this</a> GitHub Repository.  
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Fragment>
+    }
+
     render() {
-        return <GridLayout comp={this.info()} > </GridLayout>
+        return <Fragment>
+        <GridLayout comp={this.info()} > </GridLayout>
+        <ArticleContainer />
+        </Fragment>
+
         
     }
 }
