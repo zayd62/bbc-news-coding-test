@@ -57,7 +57,6 @@ class information extends Component {
         var requestResponse = await fetch(url, {
             headers: new Headers({
                 'Accept': 'application/vnd.github.v3.raw',
-                'Authorization': 'token f4dcb4bc0dcffbe6ef31102708fd719fc10fe1c9',
               })
         })
         var requestResponseJSON = await requestResponse.json()
