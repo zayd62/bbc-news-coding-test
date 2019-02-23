@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import Information from './Article/Information'
+import Information from './Article'
 import Header from './Layouts/Header'
 
 class App extends Component{
