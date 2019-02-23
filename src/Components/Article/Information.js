@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-// import {Card, CardContent, Typography} from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
@@ -21,7 +20,7 @@ class information extends Component {
     }
 
     componentDidMount(){
-        var articles = this.getNumbers()
+        var articles = this.getNumbers(3)
         console.log("article number", articles)
 
         for (var i = 0; i < articles.length; i++){
@@ -51,7 +50,7 @@ class information extends Component {
     getNumbers(numbers) {
         var i;
         var articles = [];
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < numbers; i++) {
             while (true) {
                 var num = Math.floor((Math.random() * 5) + 1);
                 if (!articles.includes(num)) {
@@ -74,7 +73,9 @@ class information extends Component {
         console.log("starting api call for", url)
         var requestResponse = await fetch(url, {
             headers: new Headers({
-                'Accept': 'application/vnd.github.v3.raw'
+                'Accept': 'application/vnd.github.v3.raw',
+                'Authorization': ''
+
               })
         })
         var requestResponseJSON = await requestResponse.json()
@@ -95,8 +96,13 @@ class information extends Component {
         console.log("finished adding all promises")
         let allArticleData = await Promise.all(singleURLpromise)
         console.log("got the results from all the promises")
-        console.log("all the data has been received")
-        console.log(allArticleData)
+        console.log("all the data has been received, converting from array to JSON object")
+
+        console.log("converted to json, adding to state")
+        this.setState({JSONdata:allArticleData})
+        console.log("reading json data from state")
+        window.title = this.state.JSONdata;
+        console.log(this.state.JSONdata);
     }
 
     render() {
