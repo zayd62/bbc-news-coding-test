@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import GridLayout from '../Layouts/GridLayout'
-import ArticleContainer from './ArticleContainer'
+import ArticleBody from './ArticleBody'
 
 const style = {
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
@@ -14,6 +14,7 @@ class information extends Component {
         super(props)
         this.state = {
             JSONdata : '',
+
         }
     }
 
@@ -26,7 +27,7 @@ class information extends Component {
         }
 
         console.log("article urls", articles)
-        // this.getDataFromAllURL(articles)
+        this.getDataFromAllURL(articles)
     }
 
     getNumbers(numbers) {
@@ -56,7 +57,7 @@ class information extends Component {
         var requestResponse = await fetch(url, {
             headers: new Headers({
                 'Accept': 'application/vnd.github.v3.raw',
-                'Authorization': 
+                'Authorization': 'token f4dcb4bc0dcffbe6ef31102708fd719fc10fe1c9',
               })
         })
         var requestResponseJSON = await requestResponse.json()
@@ -104,7 +105,9 @@ class information extends Component {
     render() {
         return <Fragment>
         <GridLayout comp={this.info()} > </GridLayout>
-        <ArticleContainer />
+        { this.state && this.state.JSONdata &&
+                <ArticleBody data={this.state.JSONdata} />
+            }
         </Fragment>
 
         
