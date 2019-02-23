@@ -7,10 +7,7 @@ import GridLayout from '../Layouts/GridLayout'
 const style = {
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
 }
-
-
-  
-    
+   
 class information extends Component {
     constructor(props){
         super(props)
