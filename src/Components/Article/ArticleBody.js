@@ -59,15 +59,33 @@ class ArticleBody extends Component {
 
     generateArticle() {
         let article = [];
-        // for (let i = 0; i < 3; i++) {
-        //     article.push(this.generateHeading("blash" + i, i))
-        // }
-        const para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum laoreet felis vitae convallis. Ut eu ante finibus, blandit neque in, congue enim. Proin ut quam libero. Fusce accumsan lacus eget convallis condimentum. Vestibulum eu ullamcorper justo. Mauris vel bibendum nisi. Vestibulum et tincidunt libero. Vestibulum rhoncus vestibulum sapien vel vehicula. Aliquam erat volutpat. Duis rutrum lectus velit, eget mattis lectus accumsan eu. Nam nisl lectus, tempor vel ullamcorper nec, dignissim at ante.";
-        article.push(this.generateHeading("this is the heading", 1))
-        article.push(this.generateParagraph(para, 2))
-        article.push(this.generateImage("https://picsum.photos/640/420/?random", "Vestibulum pellentesque laoreet urna, eget dignissim lorem maximus vel", 420, 640, 3))
-        article.push(this.generateParagraph(para, 4))
-        article.push(this.generateUnorderedList(["item1", "item2", "item3"], 5))
+
+        article.push(this.generateHeading(this.props.data.body[0].model.text, 0))
+        for (let i = 1; i < this.props.data.body.length; i++){
+            let articleItem = this.props.data.body[i]
+            if(articleItem.type === "paragraph"){
+                console.log("at index position ", i, "a paragraph is found. the contents are")
+                console.log(articleItem.model.text)
+                article.push(this.generateParagraph(articleItem.model.text, i))
+        
+            } else if(articleItem.type === "image"){
+                console.log("at index position ", i, "a image is found. the contents are")
+                console.log(articleItem.model)  
+                console.log("the url is", articleItem.model.url)
+                console.log("the altText is", articleItem.model.altText)
+                console.log("the height is", articleItem.model.height)
+                console.log("the width is", articleItem.model.width)
+                article.push(this.generateImage(articleItem.model.url, articleItem.model.altText, articleItem.model.height, articleItem.model.width, i))
+
+        
+            } else{
+                console.log("at index position ", i, "a list is found. the contents are")
+                console.log(articleItem.model.items)
+                article.push(this.generateUnorderedList(articleItem.model.items, i))
+
+            }      
+        }
+        
         return article
     }
 

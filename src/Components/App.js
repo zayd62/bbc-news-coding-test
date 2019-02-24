@@ -9,7 +9,6 @@ class App extends Component{
             {/* the line below renders the header  */}
             <Header title="Article Ranker"/>
             <Information />
-            <h1>this is app.js </h1>
         </Fragment>
     }
 }
