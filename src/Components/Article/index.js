@@ -8,26 +8,28 @@ import ArticleBody from './ArticleBody'
 const style = {
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
 }
-   
+
 class information extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            JSONdata : '',
-
+            JSONdata: 'hjgjg'
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        // change back to three
         var articles = this.getNumbers(3)
+        // making a copy of the article numbers
+        // var articleNum = articles.slice()
         console.log("article number", articles)
 
-        for (var i = 0; i < articles.length; i++){
+        for (var i = 0; i < articles.length; i++) {
             articles[i] = this.getAPIrequestURL(articles[i])
         }
 
         console.log("article urls", articles)
-        this.getDataFromAllURL(articles)
+        // this.getDataFromAllURL(articles)
     }
 
     getNumbers(numbers) {
@@ -52,12 +54,12 @@ class information extends Component {
         return requesturl;
     }
 
-    async getDataFromURL(url){
+    async getDataFromURL(url) {
         console.log("starting api call for", url)
         var requestResponse = await fetch(url, {
             headers: new Headers({
                 'Accept': 'application/vnd.github.v3.raw',
-              })
+            })
         })
         var requestResponseJSON = await requestResponse.json()
         console.log("finished api call for", url)
@@ -66,10 +68,10 @@ class information extends Component {
 
     }
 
-    async getDataFromAllURL(listOfURLS){
+    async getDataFromAllURL(listOfURLS) {
         let singleURLpromise = []
         var i
-        for (i of listOfURLS){
+        for (i of listOfURLS) {
             let promise = this.getDataFromURL(i)
             console.log("created promise for api call ", i)
             singleURLpromise.push(promise);
@@ -78,7 +80,7 @@ class information extends Component {
         let allArticleData = await Promise.all(singleURLpromise)
         console.log("got the results from all the promises")
         console.log("all the data has been received, adding to state")
-        this.setState({JSONdata:allArticleData})
+        this.setState({ JSONdata: allArticleData })
         console.log("reading json data from state")
         window.title = this.state.JSONdata;
         console.log(this.state.JSONdata);
@@ -92,9 +94,8 @@ class information extends Component {
                         Introduction
                     </Typography>
                     <Typography variant="body2">
-                        This application will show you 3 random articles and will ask you to rate them out of 5 based on
-                        how much you enjoyed the article using the dropdown below the article. The articles are automatically fetched 
-                        from <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbc/news-coding-test-dataset">this</a> GitHub Repository.  
+                        This application will show you 3 random articles and will ask you to rate them out of 5 based on how much you enjoyed the article using the dropdown below the article. The articles are automatically fetched
+                        from <a target="_blank" rel="noopener noreferrer" href="https://github.com/bbc/news-coding-test-dataset">this</a> GitHub Repository.
                     </Typography>
                 </CardContent>
             </Card>
@@ -103,13 +104,17 @@ class information extends Component {
 
     render() {
         return <Fragment>
-        <GridLayout comp={this.info()} > </GridLayout>
-        { this.state && this.state.JSONdata &&
-                <ArticleBody data={this.state.JSONdata} />
+            <GridLayout comp={this.info()} > </GridLayout>
+            {this.state && this.state.JSONdata &&
+                <Fragment>
+                    <ArticleBody data={this.state.JSONdata[0]} />
+                    <ArticleBody data={this.state.JSONdata[1]} />
+                    <ArticleBody data={this.state.JSONdata[2]} />
+                </Fragment>
             }
         </Fragment>
 
-        
+
     }
 }
 
