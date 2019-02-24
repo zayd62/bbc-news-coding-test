@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import Select from '@material-ui/core/Select';
 import GridLayout from '../Layouts/GridLayout'
 import ArticleBody from './ArticleBody'
 
@@ -13,10 +14,10 @@ class information extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            JSONdata: 'hjgjg',
-            article1:'',
-            article2:'',
-            article3:''
+            JSONdata: ['one', 'two', 'three'],
+            article1: '',
+            article2: '',
+            article3: ''
 
         }
     }
@@ -106,14 +107,47 @@ class information extends Component {
         </Fragment>
     }
 
+    select(articleNumber) {
+        return <Fragment>
+            <Card raised={true}>
+                <CardContent>
+                <Typography varient="body 2"> How much did you enjoy reading this article with 1 being "Not Enjoyable" and 5 as "Very Enjoyable"</Typography>
+                    <Select native
+                        value={this.state.articleNumber}
+                        onChange={this.handleChange(articleNumber)}
+                        inputProps={{
+                            name: articleNumber,
+                            id: articleNumber,
+                        }}>
+                        <option value="" />
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                    </Select>
+                </CardContent>
+            </Card>
+
+        </Fragment>
+
+    }
+
+    handleChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    }
+
     render() {
         return <Fragment>
             <GridLayout comp={this.info()} > </GridLayout>
             {this.state && this.state.JSONdata &&
                 <Fragment>
-                    <ArticleBody data={this.state.JSONdata[0]} articleNumber={1}/>
-                    <ArticleBody data={this.state.JSONdata[1]} articleNumber={2}/>
-                    <ArticleBody data={this.state.JSONdata[2]} articleNumber={3}/>
+                    <ArticleBody data={this.state.JSONdata[0]} articleNumber={1} />
+                    <GridLayout comp={this.select('article1')} > </GridLayout>
+                    <ArticleBody data={this.state.JSONdata[1]} articleNumber={2} />
+                    <GridLayout comp={this.select('article2')} > </GridLayout>
+                    <ArticleBody data={this.state.JSONdata[2]} articleNumber={3} />
+                    <GridLayout comp={this.select('article3')} > </GridLayout>
                 </Fragment>
             }
         </Fragment>
