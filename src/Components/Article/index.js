@@ -3,7 +3,6 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Select from '@material-ui/core/Select';
-
 import GridLayout from '../Layouts/GridLayout'
 import ArticleBody from './ArticleBody'
 
@@ -17,7 +16,7 @@ class information extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            JSONdata: ['one', 'two', 'three'],
+            JSONdata: '',
             article1: '',
             article2: '',
             article3: ''
@@ -28,8 +27,8 @@ class information extends Component {
     componentDidMount() {
         // change back to three
         var articles = this.getNumbers(3)
-        // making a copy of the article numbers
-        // var articleNum = articles.slice()
+        var Articlenum = articles.slice()
+        this.setState({articleNumbers: Articlenum})
         console.log("article number", articles)
 
         for (var i = 0; i < articles.length; i++) {
@@ -145,11 +144,11 @@ class information extends Component {
             <GridLayout comp={this.info()} > </GridLayout>
             {this.state && this.state.JSONdata &&
                 <Fragment>
-                    <ArticleBody data={this.state.JSONdata[0]} articleNumber={1} />
+                    <ArticleBody data={this.state.JSONdata[0]} articleNumber={this.state.articleNumbers[0]} />
                     <GridLayout comp={this.select('article1')} > </GridLayout>
-                    <ArticleBody data={this.state.JSONdata[1]} articleNumber={2} />
+                    <ArticleBody data={this.state.JSONdata[1]} articleNumber={this.state.articleNumbers[0]} />
                     <GridLayout comp={this.select('article2')} > </GridLayout>
-                    <ArticleBody data={this.state.JSONdata[2]} articleNumber={3} />
+                    <ArticleBody data={this.state.JSONdata[2]} articleNumber={this.state.articleNumbers[0]} />
                     <GridLayout comp={this.select('article3')} > </GridLayout>
                 </Fragment>
             }
