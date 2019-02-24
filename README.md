@@ -6,31 +6,20 @@ This is a website built using React and Material-UI that allows users to rank ar
 ## Prerequisites
 
 - NodeJS (tested on v10.15.1)
-
 - NPM (tested on v6.4.1)
+- tested on Ubuntu 18.04
 
 ### How to view
 
-You can either:
+The following commands are to be run in a terminal
 
-1.  Build from source
+1. Clone the GitHub repository ```git clone https://github.com/zayd62/bbc-news-coding-test.git ```
+2. Change the working directory ```cd bbc-news-coding-test```
+3. install dependencies ```npm install```
+4. Run the development server ```npm start```
 
-2.  pre-built //TODO
 
-### Build from source
+## API information
 
-``` 
-git clone https://github.com/zayd62/bbc-news-coding-test.git 
-cd bbc-news-coding-test
-npm install
-```
-then you can either
-
-1.  Run the development server ```npm start```
-
-2.  Create a production ready build ```npm run build```
-
-### Pre-built
-
-//TODO
+The code obtains the article data via the GitHub API. The GitHub API has a limit of 60 requests per hour associated with the originating IP address (see https://developer.github.com/v3/#rate-limiting). The application presents 3 articles therefore there is a limit of viewing the page 20 times.
 
