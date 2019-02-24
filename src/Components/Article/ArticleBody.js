@@ -75,7 +75,7 @@ class ArticleBody extends Component {
                 console.log("the altText is", articleItem.model.altText)
                 console.log("the height is", articleItem.model.height)
                 console.log("the width is", articleItem.model.width)
-                article.push(this.generateImage(articleItem.model.url, articleItem.model.altText, articleItem.model.height, articleItem.model.width, i))
+                article.push(this.generateImage(articleItem.model.url, articleItem.model.altText, parseInt(articleItem.model.height, 10), parseInt(articleItem.model.width, 10), i))
 
         
             } else{
