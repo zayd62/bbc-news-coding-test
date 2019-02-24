@@ -3,11 +3,14 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Select from '@material-ui/core/Select';
+
 import GridLayout from '../Layouts/GridLayout'
 import ArticleBody from './ArticleBody'
 
 const style = {
-    card: { padding: 5, marginTop: 10, marginBottom: 5 }
+    card: { padding: 5, marginTop: 10, marginBottom: 5 },
+    cardSelect: { padding: 5, marginBottom: 10 },
+
 }
 
 class information extends Component {
@@ -109,9 +112,9 @@ class information extends Component {
 
     select(articleNumber) {
         return <Fragment>
-            <Card raised={true}>
+            <Card raised={true} style={style.cardSelect}>
                 <CardContent>
-                <Typography varient="body 2"> How much did you enjoy reading this article with 1 being "Not Enjoyable" and 5 as "Very Enjoyable"</Typography>
+                <Typography varient="body 2"> How much did you enjoy reading this article with 1 being "Not Enjoyable" and 5 being "Very Enjoyable"</Typography>
                     <Select native
                         value={this.state.articleNumber}
                         onChange={this.handleChange(articleNumber)}
