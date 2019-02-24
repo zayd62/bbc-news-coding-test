@@ -13,7 +13,11 @@ class information extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            JSONdata: 'hjgjg'
+            JSONdata: 'hjgjg',
+            article1:'',
+            article2:'',
+            article3:''
+
         }
     }
 
@@ -107,9 +111,9 @@ class information extends Component {
             <GridLayout comp={this.info()} > </GridLayout>
             {this.state && this.state.JSONdata &&
                 <Fragment>
-                    <ArticleBody data={this.state.JSONdata[0]} />
-                    <ArticleBody data={this.state.JSONdata[1]} />
-                    <ArticleBody data={this.state.JSONdata[2]} />
+                    <ArticleBody data={this.state.JSONdata[0]} articleNumber={1}/>
+                    <ArticleBody data={this.state.JSONdata[1]} articleNumber={2}/>
+                    <ArticleBody data={this.state.JSONdata[2]} articleNumber={3}/>
                 </Fragment>
             }
         </Fragment>
