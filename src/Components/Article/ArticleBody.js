@@ -59,17 +59,7 @@ class ArticleBody extends Component {
 
     generateArticle() {
         let article = [];
-        // for (let i = 0; i < 3; i++) {
-        //     article.push(this.generateHeading("blash" + i, i))
-        // }
-        // const para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum laoreet felis vitae convallis. Ut eu ante finibus, blandit neque in, congue enim. Proin ut quam libero. Fusce accumsan lacus eget convallis condimentum. Vestibulum eu ullamcorper justo. Mauris vel bibendum nisi. Vestibulum et tincidunt libero. Vestibulum rhoncus vestibulum sapien vel vehicula. Aliquam erat volutpat. Duis rutrum lectus velit, eget mattis lectus accumsan eu. Nam nisl lectus, tempor vel ullamcorper nec, dignissim at ante.";
-        // article.push(this.generateHeading("this is the heading", 1))
-        // article.push(this.generateParagraph(para, 2))
-        // article.push(this.generateImage("https://picsum.photos/640/420/?random", "Vestibulum pellentesque laoreet urna, eget dignissim lorem maximus vel", 420, 640, 3))
-        // article.push(this.generateParagraph(para, 4))
-        // article.push(this.generateUnorderedList(["item1", "item2", "item3"], 5))
-        // console.log("this is article number: ", this.props.articleNumber)
-        // console.log("the json data given was", this.props.data)
+
         article.push(this.generateHeading(this.props.data.body[0].model.text, 0))
         for (let i = 1; i < this.props.data.body.length; i++){
             let articleItem = this.props.data.body[i]

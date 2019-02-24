@@ -29,7 +29,7 @@ class information extends Component {
         var articles = this.getNumbers(3)
         var Articlenum = articles.slice()
         this.setState({articleNumbers: Articlenum})
-        console.log("article number", articles)
+        console.log("article number", Articlenum)
 
         for (var i = 0; i < articles.length; i++) {
             articles[i] = this.getAPIrequestURL(articles[i])
