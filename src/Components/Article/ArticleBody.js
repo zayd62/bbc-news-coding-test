@@ -68,6 +68,8 @@ class ArticleBody extends Component {
         article.push(this.generateImage("https://picsum.photos/640/420/?random", "Vestibulum pellentesque laoreet urna, eget dignissim lorem maximus vel", 420, 640, 3))
         article.push(this.generateParagraph(para, 4))
         article.push(this.generateUnorderedList(["item1", "item2", "item3"], 5))
+        console.log("this is article number: ", this.props.articleNumber)
+        console.log("the json data given was", this.props.data)
         return article
     }
 
