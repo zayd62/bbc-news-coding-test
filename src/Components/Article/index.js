@@ -36,7 +36,7 @@ class information extends Component {
         }
 
         console.log("article urls", articles)
-        // this.getDataFromAllURL(articles)
+        this.getDataFromAllURL(articles)
     }
 
     getNumbers(numbers) {
