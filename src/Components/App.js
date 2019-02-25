@@ -8,6 +8,7 @@ class App extends Component{
         return <Fragment>
             {/* the line below renders the header  */}
             <Header title="Article Ranker"/>
+            // line below renders the actual page
             <Information />
         </Fragment>
     }
