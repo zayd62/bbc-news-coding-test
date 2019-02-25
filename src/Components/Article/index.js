@@ -7,6 +7,8 @@ import GridLayout from '../Layouts/GridLayout'
 import ArticleBody from './ArticleBody'
 
 const style = {
+    // styling for the component of material ui
+
     card: { padding: 5, marginTop: 10, marginBottom: 5 },
     cardSelect: { padding: 5, marginBottom: 10 },
 
@@ -15,6 +17,7 @@ const style = {
 class information extends Component {
     constructor(props) {
         super(props)
+        // state stores json data from api and the ranking of the articless
         this.state = {
             JSONdata: '',
             article1: '',
@@ -25,21 +28,23 @@ class information extends Component {
     }
 
     componentDidMount() {
-        // change back to three
+        // generate random article numbers and add numbers generate to state
         var articles = this.getNumbers(3)
         var Articlenum = articles.slice()
         this.setState({articleNumbers: Articlenum})
         console.log("article number", Articlenum)
 
+        // generate article url
         for (var i = 0; i < articles.length; i++) {
             articles[i] = this.getAPIrequestURL(articles[i])
         }
-
+        // fetch artcile as json via github api
         console.log("article urls", articles)
         this.getDataFromAllURL(articles)
     }
 
     getNumbers(numbers) {
+        // generate random number between 1 to 5 and returns as arrray
         var i;
         var articles = [];
         for (i = 0; i < numbers; i++) {
@@ -56,15 +61,18 @@ class information extends Component {
     }
 
     getAPIrequestURL(num) {
+        // generate url for the location of the file. to be to fetch the data
         var filename = "data/article-" + num + ".json";
         var requesturl = "https://api.github.com/repos/bbc/news-coding-test-dataset/contents/" + filename;
         return requesturl;
     }
 
     async getDataFromURL(url) {
+        // asyncronously call github api and return as json
         console.log("starting api call for", url)
         var requestResponse = await fetch(url, {
             headers: new Headers({
+                // header needed to get raw data
                 'Accept': 'application/vnd.github.v3.raw',
             })
         })
@@ -76,6 +84,10 @@ class information extends Component {
     }
 
     async getDataFromAllURL(listOfURLS) {
+        // async methods return a promise
+        // calls github api 3 times in paralel to get 3 articles
+        // gets promises from 3 get requests, wait for promises to resolve
+        // add json data to state
         let singleURLpromise = []
         var i
         for (i of listOfURLS) {
@@ -94,6 +106,7 @@ class information extends Component {
     }
 
     info() {
+        // info card explaining how the web app works
         return <Fragment>
             <Card raised={true} style={style.card}>
                 <CardContent>
@@ -110,6 +123,8 @@ class information extends Component {
     }
 
     select(articleNumber) {
+        // component that renders the rating drop down
+        // the value of the rating is added to the state
         return <Fragment>
             <Card raised={true} style={style.cardSelect}>
                 <CardContent>
@@ -136,12 +151,16 @@ class information extends Component {
     }
 
     handleChange = name => event => {
+        // handles the change in the value of the dropdown
         this.setState({ [name]: event.target.value });
     }
 
     render() {
         return <Fragment>
+            {/* renders the info component */}
             <GridLayout comp={this.info()} > </GridLayout>
+            {/* only when the api has returned the data is the article rendered */}
+            {/* component ArticleBody renders the article. the selects are put in a grid */}
             {this.state && this.state.JSONdata &&
                 <Fragment>
                     <ArticleBody data={this.state.JSONdata[0]} articleNumber={this.state.articleNumbers[0]} />

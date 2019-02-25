@@ -6,11 +6,13 @@ import Typography from '@material-ui/core/Typography'
 import GridLayout from '../Layouts/GridLayout'
 
 const style = {
+    // styling for the card component of material ui
     card: { padding: 5, marginTop: 10, marginBottom: 5 }
 }
 class ArticleBody extends Component {
 
     generateHeading(heading, key) {
+        // generates the heading to render
         return <Typography key={key} variant="h6" color="inherit">
             {heading}
         </Typography>
@@ -18,6 +20,7 @@ class ArticleBody extends Component {
     }
 
     generateParagraph(paragraph, key) {
+        // generates paragraph to render
         return <Typography key={key}
             variant="body2"
             style={{
@@ -28,6 +31,7 @@ class ArticleBody extends Component {
     }
 
     generateImage(url, altText, height, width, key) {
+        // generates image to render
         return <CardMedia
             component="img"
             alt={altText}
@@ -46,6 +50,7 @@ class ArticleBody extends Component {
     }
 
     generateUnorderedList(listitems, key) {
+        // generates unordered list to render
         for (let i = 0; i < listitems.length; i++) {
             listitems[i] = <li key={"li" + i}> {listitems[i]} </li>
         }
@@ -58,10 +63,14 @@ class ArticleBody extends Component {
     }
 
     generateArticle() {
+        // the json data containing the article is available as a prop. 
+        // each element (paragraph, image, heading and un ordered list is a json object in an array)
+        // loop through the array, find element type, use appripriate function to generate article
         let article = [];
-
+        // gets the article from json object
         article.push(this.generateHeading(this.props.data.body[0].model.text, 0))
         for (let i = 1; i < this.props.data.body.length; i++){
+            // 
             let articleItem = this.props.data.body[i]
             if(articleItem.type === "paragraph"){
                 console.log("at index position ", i, "a paragraph is found. the contents are")
